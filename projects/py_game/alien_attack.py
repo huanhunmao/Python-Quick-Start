@@ -1,6 +1,7 @@
 import sys
 import pygame
 from settings import Settings
+from ship import Ship
 
 
 class AlienAttack:
@@ -12,6 +13,7 @@ class AlienAttack:
         self.screen = pygame.display.set_mode((self.settings.screen_width,
                                                self.settings.screen_height))
         pygame.display.set_caption('Alien Attack')
+        self.ship = Ship(self)
 
         # Set the background color.
         self.bg_color = (self.settings.bg_color)
@@ -23,6 +25,7 @@ class AlienAttack:
                     sys.exit()
 
             self.screen.fill(self.bg_color)
+            self.ship.blitme()
 
             pygame.display.flip()
             self.clock.tick(60)
