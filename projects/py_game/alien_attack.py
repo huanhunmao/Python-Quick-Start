@@ -32,12 +32,7 @@ class AlienAttack:
             self._check_events()
             self.ship.update()
             self.bullets.update()
-
-            # 处理超出屏幕的子弹
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-                # print(len(self.bullets))
+            self._update_bullets()
             self._update_screen()
             self.clock.tick(60)
 
@@ -81,6 +76,16 @@ class AlienAttack:
         self.ship.blitme()
 
         pygame.display.flip()
+
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets."""
+        # Update bullet positions.
+        self.bullets.update()
+
+        # Get rid of bullets that have disappeared.
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
 
 if __name__ == '__main__':
