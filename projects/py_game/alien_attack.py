@@ -2,6 +2,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class AlienAttack:
@@ -11,16 +12,17 @@ class AlienAttack:
         self.settings = Settings()
 
         # 全屏模式
-        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        # self.settings.screen_width = self.screen.get_rect().width
+        # self.settings.screen_height = self.screen.get_rect().height
 
         # 窗口模式
-        # self.screen = pygame.display.set_mode((self.settings.screen_width,
-        #                                        self.settings.screen_height))
+        self.screen = pygame.display.set_mode((self.settings.screen_width,
+                                               self.settings.screen_height))
 
         pygame.display.set_caption('Alien Attack')
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
 
         # Set the background color.
         self.bg_color = (self.settings.bg_color)
@@ -29,6 +31,7 @@ class AlienAttack:
         while True:
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             self._update_screen()
             self.clock.tick(60)
 
@@ -47,9 +50,11 @@ class AlienAttack:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
-
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            # 按下空格发射子弹
+            self._fire_bullet()
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -57,12 +62,19 @@ class AlienAttack:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
+    def _fire_bullet(self):
+        """Create a new bullet and add it to the bullets group."""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+        print(self.bullets)
+
     def _update_screen(self):
         self.screen.fill(self.bg_color)
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         self.ship.blitme()
 
         pygame.display.flip()
-
 
 if __name__ == '__main__':
     ai = AlienAttack()
