@@ -97,16 +97,29 @@ class AlienAttack:
         """Create the fleet of aliens."""
         # Make an alien.
         alien = Alien(self)
+        # alien_width, alien_height = alien.rect.size
         alien_width = alien.rect.width
+        alien_height = alien.rect.height
 
-        current_x = alien_width
-        # 创建了多个 外星人
-        while current_x < (self.settings.screen_width - 2 * alien_width):
-            new_alien = Alien(self)
-            new_alien.x = current_x
-            new_alien.rect.x = current_x
-            self.aliens.add(new_alien)
-            current_x += 2 * alien_width
+        current_x, current_y = alien_width, alien_height
+        # 创建了多个 外星舰队
+        while current_y < (self.settings.screen_height - 3 * alien_height):
+            while current_x < (self.settings.screen_width - 2 * alien_width):
+                self._create_alien(current_x, current_y)
+                current_x += 2 * alien_width
+
+            # Finished a row; reset x value, and increment y value.
+            current_x = alien_width
+            current_y += 2 * alien_height
+
+    def _create_alien(self, x_position, y_position):
+        """Create an alien and place it in the row."""
+        new_alien = Alien(self)
+        new_alien.x = x_position
+        new_alien.rect.x = x_position
+        new_alien.rect.y = y_position
+        self.aliens.add(new_alien)
+
 
 if __name__ == '__main__':
     ai = AlienAttack()
