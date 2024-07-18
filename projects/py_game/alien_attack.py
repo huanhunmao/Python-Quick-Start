@@ -27,11 +27,17 @@ class AlienAttack:
         # Set the background color.
         self.bg_color = (self.settings.bg_color)
 
-    def start_game(self):
+    def run_game(self):
         while True:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+
+            # 处理超出屏幕的子弹
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+                # print(len(self.bullets))
             self._update_screen()
             self.clock.tick(60)
 
@@ -76,6 +82,7 @@ class AlienAttack:
 
         pygame.display.flip()
 
+
 if __name__ == '__main__':
     ai = AlienAttack()
-    ai.start_game()
+    ai.run_game()
