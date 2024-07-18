@@ -89,6 +89,11 @@ class AlienAttack:
         # Update bullet positions.
         self.bullets.update()
 
+        # 参数(第一个东西group1， group2， 是否删除第一个do_kill1，是否删除第二个do_kill2)
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True
+        )
+
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
