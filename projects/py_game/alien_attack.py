@@ -3,6 +3,7 @@ from time import sleep
 import pygame
 from settings import Settings
 from game_stats import GameStats
+from button import Button
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -11,6 +12,7 @@ from alien import Alien
 class AlienAttack:
     def __init__(self):
         pygame.init()
+
         self.clock = pygame.time.Clock()
         self.settings = Settings()
 
@@ -25,6 +27,11 @@ class AlienAttack:
 
         pygame.display.set_caption('Alien Attack')
 
+        # 非激活开始入侵
+        self.game_active = False
+
+        self.play_button = Button(self, 'Play')
+
         # Create an instance to store game statistics.
         self.stats = GameStats(self)
 
@@ -38,8 +45,8 @@ class AlienAttack:
         # Set the background color.
         self.bg_color = (self.settings.bg_color)
 
-        # 激活模式下开始入侵
-        self.game_active = True
+        # # 激活模式下开始入侵
+        # self.game_active = True
 
     def run_game(self):
         while True:
@@ -91,6 +98,10 @@ class AlienAttack:
             bullet.draw_bullet()
         self.ship.blitme()
         self.aliens.draw(self.screen)
+
+        # 非激活渲染 Play
+        if not self.game_active:
+            self.play_button.draw_button()
 
         pygame.display.flip()
 
