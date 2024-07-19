@@ -31,6 +31,9 @@ class Settings:
         # 1代表👉 -1代表👈
         self.fleet_direction = 1
 
+        # 分数设置
+        self.alien_points = 50
+
     # 加速方法
     def increase_speed(self):
         self.ship_speed *= self.speedup_scale

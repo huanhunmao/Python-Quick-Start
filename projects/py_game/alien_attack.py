@@ -83,6 +83,7 @@ class AlienAttack:
 
             # 开始时清除统计数据
             self.stats.reset_stats()
+            self.sb.prep_score()
             self.game_active = True
 
             # 消除子弹和外星人
@@ -149,6 +150,13 @@ class AlienAttack:
         collisions = pygame.sprite.groupcollide(
             self.bullets, self.aliens, True, True
         )
+
+        # 如果发生碰撞
+        if collisions:
+            # self.stats.score += self.settings.alien_points
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
+            self.sb.prep_score()
 
         if not self.aliens:
             # Destroy existing bullets and create new fleet.
