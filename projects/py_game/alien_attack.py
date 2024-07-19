@@ -78,6 +78,8 @@ class AlienAttack:
         if button_clicked and not self.game_active:
             # 重置设置
             self.settings.initialize_dynamic_settings()
+            self.sb.prep_score()
+            self.sb.prep_level()
             # 隐藏鼠标
             pygame.mouse.set_visible(False)
 
@@ -164,6 +166,10 @@ class AlienAttack:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            # 增加等级
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _create_fleet(self):
         """Create the fleet of aliens."""
