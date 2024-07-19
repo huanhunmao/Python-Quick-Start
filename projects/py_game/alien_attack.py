@@ -74,6 +74,8 @@ class AlienAttack:
     def _check_play_button(self, mouse_pos):
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.game_active:
+            # 重置设置
+            self.settings.initialize_dynamic_settings()
             # 隐藏鼠标
             pygame.mouse.set_visible(False)
 
@@ -149,6 +151,7 @@ class AlienAttack:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _create_fleet(self):
         """Create the fleet of aliens."""
