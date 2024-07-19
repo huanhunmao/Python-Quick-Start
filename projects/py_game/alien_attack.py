@@ -203,6 +203,7 @@ class AlienAttack:
         # ships_left 是生命次数
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
 
             # 消除所有舰队和外星人
             self.bullets.empty()
