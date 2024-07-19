@@ -72,8 +72,22 @@ class AlienAttack:
                 self._check_play_button(mouse_pos)
 
     def _check_play_button(self, mouse_pos):
-        if self.play_button.rect.collidepoint(mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.game_active:
+            # 隐藏鼠标
+            pygame.mouse.set_visible(False)
+
+            # 开始时清除统计数据
+            self.stats.reset_stats()
             self.game_active = True
+
+            # 消除子弹和外星人
+            self.bullets.empty()
+            self.aliens.empty()
+
+            # 创建新的外星舰队和飞船
+            self._create_fleet()
+            self.ship.center_ship()
 
     def _check_keydown_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -182,6 +196,7 @@ class AlienAttack:
 
         else:
             self.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""
