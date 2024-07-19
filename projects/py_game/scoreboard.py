@@ -16,7 +16,9 @@ class Scoreboard:
         self.prep_score()
 
     def prep_score(self):
-        score_str = str(self.stats.score)
+        # format score
+        rounded_score = round(self.stats.score, -1)
+        score_str = f'{rounded_score:,}'
         self.score_image = self.font.render(score_str, True, self.text_color,
                                             self.settings.bg_color)
 
