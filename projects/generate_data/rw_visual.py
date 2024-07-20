@@ -4,7 +4,7 @@ from random_walk import RandomWalk
 # 程序还会继续生成多个随机行走
 while True:
     # 进行随机walk
-    rw = RandomWalk()
+    rw = RandomWalk(50_000)
     rw.fill_walk()
 
     # 绘制walk点
@@ -12,7 +12,7 @@ while True:
     fig, ax = plt.subplots()
     points_numbers = range(rw.num_points)
     ax.scatter(rw.x_values, rw.y_values, c=points_numbers, cmap=plt.cm.Blues,
-               edgecolors='none', s=15)
+               edgecolors='none', s=1)
     ax.set_aspect('equal')
     # 绘制起点和终点
     ax.scatter(0, 0, c='green', edgecolor='none', s=100)
