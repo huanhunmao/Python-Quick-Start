@@ -14,6 +14,10 @@ while True:
     ax.scatter(rw.x_values, rw.y_values, c=points_numbers, cmap=plt.cm.Blues,
                edgecolors='none', s=15)
     ax.set_aspect('equal')
+    # 绘制起点和终点
+    ax.scatter(0, 0, c='green', edgecolor='none', s=100)
+    ax.scatter(rw.x_values[-1], rw.y_values[-1], c='red',
+               edgecolor='none', s=100)
     plt.show()
 
     # keep_running = input('Make another walk? (y/n): ')
