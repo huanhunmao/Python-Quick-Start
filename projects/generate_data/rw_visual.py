@@ -9,7 +9,8 @@ while True:
 
     # 绘制walk点
     plt.style.use('classic')
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots(figsize=(15, 9))
+    fig, ax = plt.subplots(figsize=(10, 6), dpi=128)
     points_numbers = range(rw.num_points)
     ax.scatter(rw.x_values, rw.y_values, c=points_numbers, cmap=plt.cm.Blues,
                edgecolors='none', s=1)
@@ -24,6 +25,6 @@ while True:
 
     plt.show()
 
-    # keep_running = input('Make another walk? (y/n): ')
-    # if keep_running == 'n':
-    #     break
+    keep_running = input('Make another walk? (y/n): ')
+    if keep_running == 'n':
+        break
