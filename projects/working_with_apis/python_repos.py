@@ -10,9 +10,26 @@ print(f"Status code: {r.status_code}")
 
 # Convert the response object to a dictionary.
 response_dict = r.json()
+print(f"Total repositories: {response_dict['total_count']}")
+print(f"Complete results: {not response_dict['incomplete_results']}")
 
-# Process results.
-print(response_dict.keys())
+repo_dicts = response_dict['items']
+print(f"Repositories returned: {len(repo_dicts)}")
+
+# 检查第一个存储库
+repo_dict = repo_dicts[0]
+print(f"\nKeys: {len(repo_dict)}")
+for key in sorted(repo_dict.keys()):
+    print(key)
 
 # Status code: 200
-# dict_keys(['total_count', 'incomplete_results', 'items'])
+# Total repositories: 514
+# Complete results: True
+# Repositories returned: 30
+#
+# Keys: 80
+# allow_forking
+# archive_url
+# archived
+# assignees_url
+# ...
