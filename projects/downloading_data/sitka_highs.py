@@ -27,6 +27,9 @@ ax.plot(dates, highs, label='Highs', color='blue', linewidth=2)
 # Plot lows with a red line
 ax.plot(dates, lows, label='Lows', color='red', linewidth=2)
 
+# 加阴影
+ax.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
+
 ax.set_title("Daily High and Low Temperatures, 2021", fontsize=24)
 ax.set_xlabel('', fontsize=16)
 fig.autofmt_xdate()
