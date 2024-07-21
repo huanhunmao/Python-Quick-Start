@@ -6,4 +6,6 @@ lines = path.read_text(encoding='utf-8').splitlines()
 
 reader = csv.reader(lines)
 header_row = next(reader)
-print(header_row)  # 读到 csv 数据
+
+for index, column in enumerate(header_row):
+    print(index, column)
