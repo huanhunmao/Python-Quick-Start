@@ -19,3 +19,17 @@ for repo_dict in repo_dicts:
     print(f"Stars: {repo_dict['stargazers_count']}")
     print(f"Repository: {repo_dict['html_url']}")
     print(f"Description: {repo_dict['description']}")
+
+# Selected information about each repository:
+#
+# Name: public-apis
+# Owner: public-apis
+# Stars: 302963
+# Repository: https://github.com/public-apis/public-apis
+# Description: A collective list of free APIs
+#
+# Name: system-design-primer
+# Owner: donnemartin
+# Stars: 264824
+# Repository: https://github.com/donnemartin/system-design-primer
+# Description: Learn how to design large-scale systems. Prep for the system design interview.
