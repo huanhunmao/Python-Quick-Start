@@ -1,6 +1,7 @@
 from pathlib import Path
 import csv
 from datetime import datetime
+import matplotlib.pyplot as plt
 
 path = Path('weather_data/death_valley_2021_simple.csv')
 lines = path.read_text(encoding='utf-8').splitlines()
@@ -11,6 +12,24 @@ header_row = next(reader)
 dates, highs, lows = [], [], []
 for row in reader:
     current_date = datetime.strptime(row[2], '%Y-%m-%d')
-    high = int(row[3]) # 存在缺失数据  转为整数会报错
-    low = int(row[4])
-    dates.append(current_date)
+    try:
+        high = int(row[3]) # 存在缺失数据  转为整数会报错
+        low = int(row[4])
+    except ValueError:
+        print(f"Missing data for {current_date}") # Missing data for 2021-05-04 00:00:00
+    else:
+        dates.append(current_date)
+        highs.append(high)
+        lows.append(low)
+
+plt.style.use('seaborn-v0_8')
+fig, ax = plt.subplots()
+title = "Daily High and Low Temperatures, 2021\nDeath Valley, CA"
+ax.set_title(title, fontsize=20)
+ax.set_xlabel('', fontsize=16)
+
+fig.autofmt_xdate()
+ax.set_ylabel("Temperature (F)", fontsize=16)
+ax.tick_params(labelsize=16)
+
+plt.show()
