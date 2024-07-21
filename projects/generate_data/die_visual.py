@@ -1,4 +1,5 @@
 from die import Die
+import plotly.express as px
 
 die = Die()
 
@@ -14,4 +15,6 @@ for value in poss_results:
     frequency = results.count(value)
     frequencies.append(frequency)
 
-print(frequencies)
+# 制作直方图
+fig = px.bar(x=poss_results, y=frequencies)
+fig.show()
