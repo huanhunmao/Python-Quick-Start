@@ -2,7 +2,7 @@ from random import randint
 
 
 class Die:
-    # 单个骰子🎲 1-6 的类
+    # 单个骰子🎲 1-num_sides 的类
     def __init__(self, num_sides=6):
         self.num_sides = num_sides
 
