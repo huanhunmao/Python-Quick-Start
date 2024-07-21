@@ -24,6 +24,15 @@ for row in reader:
 
 plt.style.use('seaborn-v0_8')
 fig, ax = plt.subplots()
+# Plot highs with a blue line
+ax.plot(dates, highs, label='Highs', color='blue', linewidth=2)
+
+# Plot lows with a red line
+ax.plot(dates, lows, label='Lows', color='red', linewidth=2)
+
+# 加阴影
+ax.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
+
 title = "Daily High and Low Temperatures, 2021\nDeath Valley, CA"
 ax.set_title(title, fontsize=20)
 ax.set_xlabel('', fontsize=16)
